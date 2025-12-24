@@ -8,7 +8,6 @@ import java.util.List;
 
 public class DAOProfissional {
     
-    // CORREÇÃO: throws Exception adicionado
     public static void cadastrar(Profissional p) throws Exception {
         EntityManager manager = JPAUtil.conectar();
         try{

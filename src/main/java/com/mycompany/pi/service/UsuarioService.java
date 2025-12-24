@@ -24,12 +24,8 @@ public class UsuarioService {
         
         UsuarioDAO.cadastrar(usuario); 
         
-        if(usuario.getId() == 0) {
-            Usuarios salvo = UsuarioDAO.validarUsuario(usuario);
-            if(salvo != null) usuario.setId(salvo.getId());
-        }
-        
-        profissional.setIdUser(usuario.getId()); 
+               
+        profissional.setUsuario(usuario);
         DAOProfissional.cadastrar(profissional);
         
         System.out.println("Profissional cadastrado com sucesso: " + nome);
@@ -44,7 +40,7 @@ public class UsuarioService {
         java.util.List<Profissional> lista = DAOProfissional.buscarPorId(idUsuarioProfissional);
         if(!lista.isEmpty()){
             Profissional prof = lista.get(0);
-            prof.setIdService(s.getId());
+            prof.setServico(s);
             prof.setDesc(descricao);
             DAOProfissional.atualizar(prof);
 

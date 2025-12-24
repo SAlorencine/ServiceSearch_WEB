@@ -19,10 +19,11 @@ com\mycompany\pi\AddressClient.class
 com\mycompany\pi\Service.class
 com\mycompany\pi\DAOAdressProfissionals.class
 com\mycompany\pi\PI.class
-com\mycompany\pi\UsuarioService.class
+com\mycompany\pi\Validador.class
 com\mycompany\pi\DAOClient.class
 com\mycompany\pi\DAOClientPhone.class
 com\mycompany\pi\DAOProfissionalPhone.class
 com\mycompany\pi\CellphoneProfissional.class
+com\mycompany\pi\service\UsuarioService.class
 com\mycompany\pi\Profissional.class
 com\mycompany\pi\AvaliationClient.class

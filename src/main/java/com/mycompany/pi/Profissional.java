@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.CascadeType;
 
 @Entity
 public class Profissional {
@@ -18,56 +21,30 @@ public class Profissional {
     private String data;
     private String descricao;
     
-    // Mudança aqui: de int para Integer para permitir NULL
-    private Integer idAdress;
-    private Integer idCelphone;
-    private Integer idPhone;
-    private Integer idService;
     
-    private int idUser; // Este continua int pois sempre teremos um usuário vinculado
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idAdress")
+    private AddressProfissionals endereco;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCelphone")
+    private CellphoneProfissional celular;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPhone")
+    private PhoneProfissionals telefone;
+    
+    @OneToOne
+    @JoinColumn(name = "idService")
+    private Service servico;
+    
+    @OneToOne
+    @JoinColumn(name = "idUser")
+    private Usuarios usuario;
 
     public Profissional() {
     }
 
-    public Integer getIdService() {
-        return idService;
-    }
-
-    public void setIdService(Integer idService) {
-        this.idService = idService;
-    }
-
-    public int getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-    
-    public Integer getIdAdress() {
-        return idAdress;
-    }
-
-    public void setIdAdress(Integer idAdress) {
-        this.idAdress = idAdress;
-    }
-
-    public Integer getIdCelphone() {
-        return idCelphone;
-    }
-
-    public void setIdCelphone(Integer idCelphone) {
-        this.idCelphone = idCelphone;
-    }
-
-    public Integer getIdPhone() {
-        return idPhone;
-    }
-
-    public void setIdPhone(Integer idPhone) {
-        this.idPhone = idPhone;
-    }
 
     public int getId() {
         return id;
@@ -115,5 +92,45 @@ public class Profissional {
 
     public void setDesc(String desc) {
         this.descricao = desc;
+    }
+
+    public AddressProfissionals getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(AddressProfissionals endereco) {
+        this.endereco = endereco;
+    }
+
+    public CellphoneProfissional getCelular() {
+        return celular;
+    }
+
+    public void setCelular(CellphoneProfissional celular) {
+        this.celular = celular;
+    }
+
+    public PhoneProfissionals getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(PhoneProfissionals telefone) {
+        this.telefone = telefone;
+    }
+
+    public Service getServico() {
+        return servico;
+    }
+
+    public void setServico(Service servico) {
+        this.servico = servico;
+    }
+
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
     }
 }

@@ -4,59 +4,41 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.CascadeType;
 
 @Entity
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     private String nome;
     private String cpf;
     private String rg;
     private String data;
     
-    // Mudança aqui: de int para Integer
-    private Integer idAdress;
-    private Integer idCelphone;
-    private Integer idPhone;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idAdress") 
+    private AddressClient endereco;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCelphone")
+    private CelphoneClients celular;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPhone")
+    private PhoneClients telefone;
     
-    private int idUser;
+    @OneToOne
+    @JoinColumn(name = "idUser")
+    private Usuarios usuario;
 
     public Client() {
     }
 
-    public int getIdUser() {
-        return idUser;
-    }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
-    }
-    
-    public Integer getIdAdress() {
-        return idAdress;
-    }
-
-    public void setIdAdress(Integer idAdress) {
-        this.idAdress = idAdress;
-    }
-
-    public Integer getIdCelphone() {
-        return idCelphone;
-    }
-
-    public void setIdCelphone(Integer idCelphone) {
-        this.idCelphone = idCelphone;
-    }
-
-    public Integer getIdPhone() {
-        return idPhone;
-    }
-
-    public void setIdPhone(Integer idPhone) {
-        this.idPhone = idPhone;
-    }
-    
     public int getId() {
         return id;
     }
@@ -95,5 +77,37 @@ public class Client {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public AddressClient getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(AddressClient endereco) {
+        this.endereco = endereco;
+    }
+
+    public CelphoneClients getCelular() {
+        return celular;
+    }
+
+    public void setCelular(CelphoneClients celular) {
+        this.celular = celular;
+    }
+
+    public PhoneClients getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(PhoneClients telefone) {
+        this.telefone = telefone;
+    }
+
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
     }
 }
