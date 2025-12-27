@@ -15,6 +15,7 @@ com\mycompany\pi\DAOClientCelphone.class
 com\mycompany\pi\CelphoneClients.class
 com\mycompany\pi\DAOService.class
 com\mycompany\pi\DAOProfessionalCelphones.class
+com\mycompany\pi\controller\LoginServlet.class
 com\mycompany\pi\AddressClient.class
 com\mycompany\pi\Service.class
 com\mycompany\pi\DAOAdressProfissionals.class

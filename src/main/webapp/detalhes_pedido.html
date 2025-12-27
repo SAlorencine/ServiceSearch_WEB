@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Pedido</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container screen-dashboard">
+        <a href="dashboard_profissional.html" style="text-decoration: none; color: #666; display: block; margin-bottom: 15px;">
+            &larr; Voltar
+        </a>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="margin: 0; text-align: left;">Pedido <span th:text="${pedido.cod} ?: 'PED-001234'"></span></h2>
+            
+            <span class="status-badge" 
+                  th:style="${pedido.status == 'PENDENTE' ? 'background-color: #ffc107; color: #333;' : 
+                             (pedido.status == 'FINALIZADO' ? 'background-color: #28a745; color: white;' : '')}"
+                  th:text="${pedido.status}">
+                PENDENTE
+            </span>
+        </div>
+
+        <div class="pedido-card">
+            <h3 style="text-align: left; color: #007bff; margin-top: 0;">Tipo de Serviço</h3>
+            <p style="color: #666; margin-bottom: 20px;">Instalação Elétrica</p>
+
+            <h3 style="text-align: left; color: #007bff;">Descrição do Problema</h3>
+            <p style="color: #666; line-height: 1.5;" th:text="${pedido.desc}">
+                Preciso instalar 5 novas tomadas na sala e cozinha. Também é necessário fazer uma revisão no quadro elétrico pois alguns disjuntores estão apresentando problemas.
+            </p>
+
+            <h3 style="text-align: left; color: #007bff; margin-top: 25px;">Dados do Cliente</h3>
+            
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <div style="background-color: #007bff; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-weight: bold;">
+                    <span th:text="${#strings.substring(cliente.nome,0,1)}">C</span>
+                </div>
+                <div>
+                    <strong style="display: block; color: #333;" th:text="${cliente.nome}">Carlos Mendes</strong>
+                </div>
+            </div>
+
+            <div style="color: #666; font-size: 0.9em; margin-left: 55px;">
+                <p style="margin: 5px 0;"><i class="fas fa-phone" style="width: 20px;"></i> <span th:text="${celular?.num} ?: '(11) 99999-9999'"></span></p>
+                <p style="margin: 5px 0;"><i class="fas fa-envelope" style="width: 20px;"></i> <span th:text="${cliente.login}">email@teste.com</span></p>
+                <p style="margin: 5px 0;">
+                    <i class="fas fa-map-marker-alt" style="width: 20px;"></i> 
+                    <span th:text="${endereco != null} ? ${endereco.endereco + ', ' + endereco.num} : 'Endereço não informado'">Rua das Flores, 123</span>
+                </p>
+            </div>
+        </div>
+
+        <form action="/atualizar-pedido" method="POST" style="margin-top: 20px;">
+            <input type="hidden" name="idPedido" th:value="${pedido.id}">
+            
+            <button th:if="${pedido.status == 'PENDENTE'}" 
+                    type="submit" name="acao" value="aceitar" 
+                    class="btn-primary" 
+                    style="background-color: #28a745;">
+                Aceitar Pedido
+            </button>
+
+            <button th:if="${pedido.status == 'EM_ANDAMENTO'}" 
+                    type="submit" name="acao" value="finalizar" 
+                    class="btn-primary">
+                Finalizar Serviço
+            </button>
+        </form>
+    </div>
+</body>
+</html>

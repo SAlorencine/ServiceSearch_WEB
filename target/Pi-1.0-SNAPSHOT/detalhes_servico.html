@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Serviço</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script.js"></script>
+    <script>
+        function processarServico(event) {
+            event.preventDefault();
+
+            if (!validarFormularioServico(event)) {
+                return false;
+            }
+
+            alert('Cadastro Profissional Completo! Bem-vindo.');
+
+            window.location.href = 'dashboard_profissional.html';
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <a href="cadastro.html" style="text-decoration: none; color: #666;">&larr; Voltar</a>
+        <h2>Detalhes do Serviço</h2>
+        <p>Passo 3 de 4</p>
+        
+        <form name="formServico" action="index.html" onsubmit="processarServico(event)">
+            <div class="form-group">
+                <label>Título da Profissão</label>
+                <input type="text" name="titulo" placeholder="Ex: Eletricista" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Preço Base / Valor Hora</label>
+                <input type="text" name="preco" placeholder="R$ 100,00" oninput="mascaraMoeda(this)" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Descrição do Serviço</label>
+                <textarea name="descricao" rows="4" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Anos de Experiência</label>
+                <input type="number" name="experiencia" required>
+            </div>
+            
+            <button type="submit" class="btn-primary">Finalizar Cadastro</button>
+        </form>
+    </div>
+</body>
+</html>
