@@ -1,12 +1,15 @@
 package com.mycompany.pi;
 
+
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Profissional {
@@ -20,31 +23,83 @@ public class Profissional {
     private String rg;
     private String data;
     private String descricao;
+    private Double valorHora;
     
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idAdress")
+    @OneToOne(cascade = CascadeType.ALL) 
+    @JoinColumn(name = "id_adress")
     private AddressProfissionals endereco;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idCelphone")
+    @OneToOne(cascade = CascadeType.ALL) 
+    @JoinColumn(name = "id_celphone")
     private CellphoneProfissional celular;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPhone")
+    @OneToOne(cascade = CascadeType.ALL) 
+    @JoinColumn(name = "id_phone")
     private PhoneProfissionals telefone;
     
-    @OneToOne
+    
+     @ManyToOne
     @JoinColumn(name = "idService")
-    private Service servico;
+    private Service service;
     
     @OneToOne
     @JoinColumn(name = "idUser")
     private Usuarios usuario;
 
+    public Usuarios getUsuario() { return usuario; }
+    public void setUsuario(Usuarios usuario) { this.usuario = usuario; }
+
+
+    
+    public void setService(Service service){
+    this.service = service;
+    }
+    public Service getService() {
+        return service;
+    }
+    
+    public Double getValorHora() {
+        return valorHora;
+    }
+
+    public void setValorHora(Double valorHora) {
+        this.valorHora = valorHora;
+    }
+
     public Profissional() {
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public AddressProfissionals getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(AddressProfissionals endereco) {
+        this.endereco = endereco;
+    }
+
+    public CellphoneProfissional getCelular() {
+        return celular;
+    }
+
+    public void setCelular(CellphoneProfissional celular) {
+        this.celular = celular;
+    }
+
+    public PhoneProfissionals getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(PhoneProfissionals telefone) {
+        this.telefone = telefone;
+    }
+
+   
 
     public int getId() {
         return id;
@@ -93,44 +148,5 @@ public class Profissional {
     public void setDesc(String desc) {
         this.descricao = desc;
     }
-
-    public AddressProfissionals getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(AddressProfissionals endereco) {
-        this.endereco = endereco;
-    }
-
-    public CellphoneProfissional getCelular() {
-        return celular;
-    }
-
-    public void setCelular(CellphoneProfissional celular) {
-        this.celular = celular;
-    }
-
-    public PhoneProfissionals getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(PhoneProfissionals telefone) {
-        this.telefone = telefone;
-    }
-
-    public Service getServico() {
-        return servico;
-    }
-
-    public void setServico(Service servico) {
-        this.servico = servico;
-    }
-
-    public Usuarios getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuarios usuario) {
-        this.usuario = usuario;
-    }
+    
 }

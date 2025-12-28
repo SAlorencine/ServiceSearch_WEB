@@ -1,45 +1,79 @@
 package com.mycompany.pi;
 
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Solicitation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    int idClient;
-    int idProfissional;
+    @ManyToOne
+    @JoinColumn(name = "id_client")
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "id_profissional")
+    private Profissional profissional;
     String descr;
     boolean finalizado;
+    
+    private String status; 
 
-    public boolean isFinalizada() {
+  
+    public Solicitation() {
+        this.status = "PENDENTE";
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public boolean isFinalizado() {
         return finalizado;
     }
 
-    public void setFinalizada(boolean finalizada) {
-        this.finalizado = finalizada;
+    public void setFinalizado(boolean finalizado) {
+        this.finalizado = finalizado;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Profissional getProfissional() {
+        return profissional;
+    }
+
+    public void setProfissional(Profissional profissional) {
+        this.profissional = profissional;
+    }
+
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
     }
     
     
 
-    public int getIdClient() {
-        return idClient;
-    }
 
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
-    }
-
-    public int getIdProfissional() {
-        return idProfissional;
-    }
-
-    public void setIdProfissional(int idProfissional) {
-        this.idProfissional = idProfissional;
-    }
 
     
 
@@ -59,8 +93,6 @@ public class Solicitation {
         this.descr = desc;
     }
 
-    public Solicitation() {
-    }
-    
+
     
 }
